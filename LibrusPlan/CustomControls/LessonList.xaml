@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="LibrusPlan.CustomControls.LessonList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibrusPlan.CustomControls"
+             xmlns:conve="clr-namespace:LibrusPlan.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="516" d:DesignWidth="164.125" x:Name="MyLesson">
+    <UserControl.Resources>
+        <conve:IsBreakConverter x:Key="IsBreakConverter"/>
+        <conve:IsOverCapLesson x:Key="IsOverCapLesson"/>
+        <conve:deletepolish x:Key="deletepolish"/>
+    </UserControl.Resources>
+    <Grid>
+        <ItemsControl DataContext="{Binding ElementName=MyLesson}"
+            ItemsSource="{Binding ItemsSource}"
+                              HorizontalAlignment="Left">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="54">
+                        <TextBlock Text="{Binding name, Converter={StaticResource deletepolish}}"
+                                           Style="{DynamicResource Lesson}"/>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Margin" Value="0,0,0,12"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=lessonNum}" Value="8">
+                                        <Setter Property="Margin" Value="0,0,0,0"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=lessonNum, Converter={StaticResource IsOverCapLesson}}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

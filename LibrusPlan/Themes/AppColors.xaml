@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <LinearGradientBrush EndPoint="4,1" StartPoint="0.5,0" x:Key="TimePeriodBG">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="39.806" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FFEBBBA7" Offset="0"/>
+        <GradientStop Offset="0.762" Color="#FFCFC7F8"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TimePeriodBreakBG" Color="#C8B8B8"/>
+    <SolidColorBrush x:Key="WeekDay1" Color="#282828"/>
+    <SolidColorBrush x:Key="WeekDay2" Color="#282828"/>
+    <!--3F0049 -->
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="WeekDayBG">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="-54.462" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FFEBBBA7" Offset="0"/>
+        <GradientStop Color="#FFCFC7F8" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="MainAppBG">
+        <GradientStop Color="#FFEDF1F4" Offset="0.042"/>
+        <GradientStop Color="#FFC3CBDC" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="LocalNameBG">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="-57.995" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform X="-0.5"/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#A9B1C7" Offset="0"/>
+        <GradientStop Color="#C5BBF6" Offset="0.7"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="CurrentDay" Color="#0F9946"/>
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="IdBG">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="-40.601" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FFDCF8EF"/>
+        <GradientStop Color="#FFFEE2F8" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="UsrPassBG">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="-48.366" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FFDEA7F6" Offset="0.105"/>
+        <GradientStop Color="#FFEACEB9" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="ConnecttBG">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="-28.072" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FF0BAB64" Offset="0.201"/>
+        <GradientStop Color="#FF3BB78F" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ChangeAccBG" Color="#0BAB64"/>
+    <SolidColorBrush x:Key="ConnectBG" Color="#0BAB64"/>
+
+</ResourceDictionary>

@@ -1,0 +1,359 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:conve="clr-namespace:LibrusPlan.Converters">
+    <Style TargetType="{x:Type TextBlock}" x:Key="WeekDay">
+        <Setter Property="FontFamily" Value="Viga"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="164.125"/>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="Lesson">
+        <Setter Property="FontFamily" Value="Viga"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Width" Value="164.125"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="#000000"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="LocalNameBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="8"
+                            Background="{DynamicResource LocalNameBG}"
+                            Width="174"
+                            Height="38">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.23"/>
+                        </Border.Effect>
+
+                        <Grid>
+                            <TextBox VerticalAlignment="Stretch"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalAlignment="Stretch"
+                                     x:Name="NameBox"
+                                     Background="Transparent"
+                                     TextWrapping="NoWrap"
+                                     BorderThickness="0"
+                                     Foreground="#312E2E"
+                                     FontSize="20"
+                                     FontFamily="Markazi Text"
+                                     Margin="6,0,0,0"
+                                     Text="{Binding LocalName, Mode=TwoWay}">
+                            </TextBox>
+
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="local name"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="20"
+                                       FontFamily="Markazi Text"
+                                       Margin="6,0,0,0"
+                                       Foreground="#A0A0B4">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=NameBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="IdBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="8"
+                            Background="{DynamicResource IdBG}"
+                            Width="43"
+                            Height="38">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.23"/>
+                        </Border.Effect>
+
+                        <Grid>
+                            <TextBox VerticalAlignment="Stretch"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalAlignment="Center"
+                                     x:Name="NameBox"
+                                     Background="Transparent"
+                                     TextWrapping="NoWrap"
+                                     BorderThickness="0"
+                                     Foreground="#312E2E"
+                                     FontSize="20"
+                                     FontFamily="Markazi Text"
+                                     Margin="0,0,0,0"
+                                     Text="{Binding Id, Mode=TwoWay}">
+                            </TextBox>
+
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="id"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="20"
+                                       FontFamily="Markazi Text"
+                                       Margin="0,0,0,0"
+                                       Foreground="#A2A1B7">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=NameBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="LoginBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="8"
+                            Background="{DynamicResource UsrPassBG}"
+                            Width="194"
+                            Height="38">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.23"/>
+                        </Border.Effect>
+
+                        <Grid>
+                            <TextBox VerticalAlignment="Stretch"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalAlignment="Stretch"
+                                     x:Name="NameBox"
+                                     Background="Transparent"
+                                     TextWrapping="NoWrap"
+                                     BorderThickness="0"
+                                     Foreground="#312E2E"
+                                     FontSize="20"
+                                     FontFamily="Markazi Text"
+                                     Margin="6,0,0,0"
+                                     Text="{Binding Login, Mode=TwoWay}">
+                            </TextBox>
+
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="login"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="20"
+                                       FontFamily="Markazi Text"
+                                       Margin="6,0,0,0"
+                                       Foreground="#A1A1BA">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=NameBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="PasswordBox">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="8"
+                            Background="{DynamicResource UsrPassBG}"
+                            Width="194"
+                            Height="38">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.23"/>
+                        </Border.Effect>
+
+                        <Grid>
+                            <TextBox VerticalAlignment="Stretch"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalAlignment="Stretch"
+                                     x:Name="NameBox"
+                                     Background="Transparent"
+                                     TextWrapping="NoWrap"
+                                     BorderThickness="0"
+                                     Foreground="#312E2E"
+                                     FontSize="20"
+                                     FontFamily="Markazi Text"
+                                     Margin="6,0,0,0"
+                                     Text="{Binding Password, Mode=TwoWay}">
+                            </TextBox>
+
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="password"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="20"
+                                       FontFamily="Markazi Text"
+                                       Margin="6,0,0,0"
+                                       Foreground="#A1A1BA">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=NameBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="ConnectBtn">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="8"
+                            Width="94"
+                            Height="24">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.23"/>
+                        </Border.Effect>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="#0BAB64"/>
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation 
+                                                          AutoReverse="False" 
+                                                          Duration="0:0:0.1" 
+                                                          From="#0BAB64" To="#08BF6E"
+                                                          AccelerationRatio="1" 
+                                                          Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                          FillBehavior="HoldEnd">
+                                                    </ColorAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation 
+                                                          AutoReverse="False" 
+                                                          Duration="0:0:0.1" 
+                                                          From="#08BF6E" To="#0BAB64"
+                                                          AccelerationRatio="1" 
+                                                          Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                          FillBehavior="HoldEnd">
+                                                    </ColorAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid>
+                            <TextBlock VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"
+                                     x:Name="NameBox"
+                                     Background="Transparent"
+                                     TextWrapping="NoWrap"
+                                     Foreground="#312E2E"
+                                     FontSize="10"
+                                     FontFamily="Miriam Libre"
+                                     FontWeight="Bold"
+                                     Margin="0,0,0,0"
+                                     Text="CONNECT">
+                            </TextBlock>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="ChangeAccBtn">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Height="13">
+                        <TextBlock Text="CHANGE ACCOUNT"
+                                   FontFamily="Miriam Libre"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="#0BAB64"/>
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation 
+                                                          AutoReverse="False" 
+                                                          Duration="0:0:0.1" 
+                                                          From="#0BAB64" To="#08BF6E"
+                                                          AccelerationRatio="1" 
+                                                          Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                          FillBehavior="HoldEnd">
+                                                    </ColorAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation 
+                                                          AutoReverse="False" 
+                                                          Duration="0:0:0.1" 
+                                                          From="#08BF6E" To="#0BAB64"
+                                                          AccelerationRatio="1" 
+                                                          Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                          FillBehavior="HoldEnd">
+                                                    </ColorAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
