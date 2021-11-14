@@ -57,7 +57,7 @@
 
                         <MenuItem>
                             <MenuItem.Header>
-                                <ToggleButton Content="load data localy"
+                                <ToggleButton Content="load&amp;save localy"
                                       Margin="0,0,0,0" BorderThickness="0" BorderBrush="Transparent"
                                       IsChecked="{Binding loadlocalIsChecked, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                               x:Name="loaddatalocalBtn">

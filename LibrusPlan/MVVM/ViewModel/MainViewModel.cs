@@ -19,6 +19,7 @@ namespace LibrusPlan.MVVM.ViewModel
         public static string configPath = "LB/config.json";
         public static string userDataPath = "LB/UserData.json";
         public static string dataPath = "LB/data.json";
+        public static string timePeriodPath = "LB/dataPeriod.json";
 
         private AccountModel _acc;
         public AccountModel acc
@@ -158,7 +159,7 @@ namespace LibrusPlan.MVVM.ViewModel
             OpenLoginCommand = new RelayCommand(o => LoginWin.Show());
             LoginCommand = new RelayCommand(o => LoginFromView());
 
-            LoadData();
+            Task.Run(LoadData);
 
             if (DebugMode)
             {
@@ -197,25 +198,42 @@ namespace LibrusPlan.MVVM.ViewModel
                     config = DefConfig();
                     File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
                 }
-
-                if (config.AutoLogin)
+                //autologin
+                if (config.AutoLogin && File.Exists(userDataPath))
                 {
-                    if (File.Exists(userDataPath))
+                    try
+                    {
+                        var json = File.ReadAllText(userDataPath);
+                        var x = JsonConvert.DeserializeObject<SavedUserData> (json);
+                        init(x.locname, x.Class,x.libusername, x.libpassword);
+                        autologinIsChecked = true;
+                    }
+                    catch (Exception) {autologinIsChecked = false;}
+                }
+                else
+                {
+                    autologinIsChecked = false; //just in case
+                    //local data
+                    if (config.LoadLocalOnStart && File.Exists(dataPath) && File.Exists(timePeriodPath))
                     {
                         try
                         {
-                            var json = File.ReadAllText(userDataPath);
-                            var x = JsonConvert.DeserializeObject<SavedUserData> (json);
-                            init(x.locname, x.Class,x.libusername, x.libpassword);
-                            autologinIsChecked = true;
+                            acc = new AccountModel("local data", "local");
+                            Task.Run(() =>
+                            {
+                                var json = File.ReadAllText(dataPath);
+                                data = JsonConvert.DeserializeObject<LibrusLib.LibrusPlan>(json);
+                            });
+                            Task.Run(() =>
+                            {
+                                var json = File.ReadAllText(timePeriodPath);
+                                LimitedPeriods = JsonConvert.DeserializeObject<List<TimePeriod>>(json);
+                            });
                         }
-                        catch (Exception)
-                        {
-                            autologinIsChecked = false;
-                        }     
+                        catch (Exception) { loadlocalIsChecked = false; }
                     }
-                    else
-                        autologinIsChecked = false;
+                    else 
+                        loadlocalIsChecked = false;
                 }
 
                 //TODO: EnglishOrPolish
@@ -244,17 +262,17 @@ namespace LibrusPlan.MVVM.ViewModel
                 init(LocalName, Id, Login, Password);
 
                 //save data
-                if (Directory.Exists("LB"))
+                if (!Directory.Exists("LB"))
+                    Directory.CreateDirectory("LB");
+                var json = JsonConvert.SerializeObject(new SavedUserData
                 {
-                    var json = JsonConvert.SerializeObject(new SavedUserData{ 
-                        locname = LocalName,
-                        Class= Id,
-                        libusername= Login,
-                        libpassword= Password
-                    });
-                    File.WriteAllText(userDataPath, json);
-                }
-                    
+                    locname = LocalName,
+                    Class = Id,
+                    libusername = Login,
+                    libpassword = Password
+                });
+                File.WriteAllText(userDataPath, json);
+
             }
             catch (Exception)
             {
@@ -262,6 +280,7 @@ namespace LibrusPlan.MVVM.ViewModel
             
         }
 
+        //contains saving data
         async void init(string locname, string Class, string libruslogin, string libruspassword)
         {
             //currently used for debug purposes
@@ -275,6 +294,12 @@ namespace LibrusPlan.MVVM.ViewModel
                     x.Add(data.timePeriods[i]);
                 }
                 LimitedPeriods = x;
+
+                //save data
+                if (!Directory.Exists("LB"))
+                    Directory.CreateDirectory("LB");
+                File.WriteAllTextAsync(dataPath, JsonConvert.SerializeObject(data));
+                File.WriteAllTextAsync(timePeriodPath, JsonConvert.SerializeObject(LimitedPeriods));
             }
             catch (Exception)
             {

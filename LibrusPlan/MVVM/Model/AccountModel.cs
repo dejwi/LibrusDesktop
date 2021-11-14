@@ -11,8 +11,8 @@ namespace LibrusPlan.MVVM.Model
     {
         public string locname { get; set; }
         public string Class { get; set; }
-        public LibrusData accountData { get; set; }
-        public AccountModel(string locname,string Class, LibrusData accountData)
+        public LibrusData? accountData { get; set; }
+        public AccountModel(string locname,string Class, LibrusData? accountData = null)
         {
             this.locname = locname;
             this.accountData = accountData;
