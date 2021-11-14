@@ -9,9 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove=".github\**" />
     <Compile Remove="Debug\**" />
+    <EmbeddedResource Remove=".github\**" />
     <EmbeddedResource Remove="Debug\**" />
+    <None Remove=".github\**" />
     <None Remove="Debug\**" />
+    <Page Remove=".github\**" />
     <Page Remove="Debug\**" />
   </ItemGroup>
 
@@ -32,10 +36,6 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include=".github\workflows\deploy-class-commands.yml" />
   </ItemGroup>
 
 </Project>
