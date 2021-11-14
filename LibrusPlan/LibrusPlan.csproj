@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include=".github\workflows\deploy-LibrusPlan.yml" />
+    <None Include=".github\workflows\deploy-class-commands.yml" />
   </ItemGroup>
 
 </Project>
