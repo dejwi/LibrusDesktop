@@ -3,7 +3,7 @@ name: "Dotnet build"
 on:
     push:
         tags:
-        - "desktop/v*"
+        - "LibrusDesktop/v*"
 
 jobs:
 
@@ -29,30 +29,12 @@ jobs:
         # Restore the application to populate the obj folder with RuntimeIdentifiers
         - name: Restore the application
           run: dotnet restore
-
-        # Build Debug
-        #- name: Build Debug
-         # run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Debug
         
-        # Build Debug
-        - name: Build Release
-          run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Release
+        #- name: Build Release
+        #  run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Release
+
         - name: Build Publish
           run: dotnet publish LibrusPlan\LibrusPlan.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
-
-        # Debug
-        #- name: Upload Debug
-        #  uses: actions/upload-artifact@v2
-         # with:
-          #  name: ${{ steps.date.outputs.date }} Debug
-          #  path: LibrusPlan\bin\Debug\net5.0-windows
-        
-        # Release
-        #- name: Upload Release
-        #  uses: actions/upload-artifact@v2
-        #  with:
-        #    name: ${{ steps.date.outputs.date }} Release
-        #    path: LibrusPlan\bin\Release\net5.0-windows
 
         - uses: actions/create-release@v1
           id: create_release
@@ -65,14 +47,12 @@ jobs:
         - uses: thedoctor0/zip-release@master
           with:
             type: 'zip'
-            #path: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
             directory: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
-            filename: 'release.zip'
+            filename: 'LibrusDesktop.zip'
             
 
         - uses: csexton/release-asset-action@v2
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
-            #file: 'release.zip'
-            pattern: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/release.zip
+            pattern: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/LibrusDesktop.zip
             release-url: ${{ steps.create_release.outputs.upload_url }}
