@@ -38,7 +38,7 @@ jobs:
     - name: Build Release
       run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Release
     - name: Build Publish
-      run: dotnet publish LibrusPlan\LibrusPlan.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+      run: dotnet publish LibrusPlan\LibrusPlan.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
 
     # Debug
     #- name: Upload Debug
