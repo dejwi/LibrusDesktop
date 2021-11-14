@@ -42,7 +42,7 @@
                       Background="Transparent"
                       Foreground="WhiteSmoke"
                       VerticalAlignment="Center">
-                    <MenuItem Header="_Settings" Foreground="WhiteSmoke">
+                    <MenuItem Header="{DynamicResource settings}" Foreground="WhiteSmoke">
                         <MenuItem.ItemContainerStyle>
                             <Style TargetType="{x:Type MenuItem}">
                                 <Setter Property="Template">
@@ -182,7 +182,7 @@
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Background" Value="#D46A6A"/>
-                                            <Setter Property="Content" Value="Polish"/>
+                                            <Setter Property="Content" Value="English"/>
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ToggleButton">
@@ -196,7 +196,7 @@
                                             <Style.Triggers>
 
                                                 <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Content" Value="English"/>
+                                                    <Setter Property="Content" Value="Polski"/>
                                                     <Trigger.EnterActions>
                                                         <BeginStoryboard>
                                                             <Storyboard>
@@ -380,7 +380,7 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1"
                         Background="{DynamicResource WeekDayBG}" >
 
-                <TextBlock Text="Poniedzialek">
+                <TextBlock Text="{DynamicResource Day1}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}" 
                                BasedOn="{StaticResource WeekDay}">
@@ -394,7 +394,7 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBlock Text="Wtorek">
+                <TextBlock Text="{DynamicResource Day2}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}" 
                                BasedOn="{StaticResource WeekDay}">
@@ -408,7 +408,7 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBlock Text="Sroda">
+                <TextBlock Text="{DynamicResource Day3}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}" 
                                BasedOn="{StaticResource WeekDay}">
@@ -422,7 +422,7 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBlock Text="Czwartek">
+                <TextBlock Text="{DynamicResource Day4}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}" 
                                BasedOn="{StaticResource WeekDay}">
@@ -436,7 +436,7 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBlock Text="Piatek">
+                <TextBlock Text="{DynamicResource Day4}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}" 
                                BasedOn="{StaticResource WeekDay}">

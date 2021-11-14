@@ -122,13 +122,15 @@ namespace LibrusPlan.MVVM.ViewModel
                 _EnglishPolishIsChecked = value;
                 if (value)
                 {
-                    //checked | english
-                    config.EnglishOrPolish = "English";
+                    //checked | polish
+                    config.EnglishOrPolish = "Polish";
+                    App.SelectCulture("Polish");
                 }
                 else
                 {
-                    //unchecked
-                    config.EnglishOrPolish = "Polish";
+                    //unchecked | english
+                    config.EnglishOrPolish = "English";
+                    App.SelectCulture("English");
                 }
                 Task.Run(SaveConfig);
                 OnPropertyChanged();
@@ -186,6 +188,7 @@ namespace LibrusPlan.MVVM.ViewModel
                     {
                         var json = File.ReadAllText(configPath);
                         config = JsonConvert.DeserializeObject<ConfigModel>(json);
+                        App.SelectCulture(config.EnglishOrPolish);
                     }
                     catch (Exception)
                     {
@@ -273,6 +276,8 @@ namespace LibrusPlan.MVVM.ViewModel
                 });
                 File.WriteAllText(userDataPath, json);
 
+                //just reset progressbar in case login pass was wrong
+                
             }
             catch (Exception)
             {
@@ -300,9 +305,13 @@ namespace LibrusPlan.MVVM.ViewModel
                     Directory.CreateDirectory("LB");
                 File.WriteAllTextAsync(dataPath, JsonConvert.SerializeObject(data));
                 File.WriteAllTextAsync(timePeriodPath, JsonConvert.SerializeObject(LimitedPeriods));
+
+                
             }
             catch (Exception)
             {
+                await Task.Delay(600);
+                ((MainWindow)Application.Current.MainWindow).LoadProgress.Value = 0;
             }
             
         }

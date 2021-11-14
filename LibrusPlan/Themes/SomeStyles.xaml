@@ -151,7 +151,7 @@
                             </TextBox>
 
                             <TextBlock IsHitTestVisible="False"
-                                       Text="login"
+                                       Text="librus login"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        FontSize="20"
@@ -205,7 +205,7 @@
                             </TextBox>
 
                             <TextBlock IsHitTestVisible="False"
-                                       Text="password"
+                                       Text="{DynamicResource password}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        FontSize="20"
@@ -291,7 +291,7 @@
                                      FontFamily="Miriam Libre"
                                      FontWeight="Bold"
                                      Margin="0,0,0,0"
-                                     Text="CONNECT">
+                                     Text="{DynamicResource connect}">
                             </TextBlock>
                         </Grid>
 
@@ -306,7 +306,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Height="13">
-                        <TextBlock Text="CHANGE ACCOUNT"
+                        <TextBlock Text="{DynamicResource changeacc}"
                                    FontFamily="Miriam Libre"
                                    FontSize="9"
                                    HorizontalAlignment="Center"

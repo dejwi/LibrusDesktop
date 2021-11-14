@@ -25,4 +25,11 @@
     <ProjectReference Include="..\LibrusLib\LibrusLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="lang\StringResources.English.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

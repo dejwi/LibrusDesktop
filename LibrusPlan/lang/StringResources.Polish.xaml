@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="Day1">Poniedzialek</system:String>
+    <system:String x:Key="Day2">Wtorek</system:String>
+    <system:String x:Key="Day3">Sroda</system:String>
+    <system:String x:Key="Day4">Czwartek</system:String>
+    <system:String x:Key="Day5">Piatek</system:String>
+
+    <system:String x:Key="settings">Ustawienia</system:String>
+
+    <system:String x:Key="changeacc">ZMIEN KONTO</system:String>
+    <system:String x:Key="password">librus haslo</system:String>
+    <system:String x:Key="connect">POLACZ</system:String>
+</ResourceDictionary>
