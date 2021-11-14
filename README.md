@@ -4,7 +4,7 @@
 </p>
 
 # Functionality
-login&view your school timetable using data from librus
+login&view your school timetable using data from librus <br>
 made with WPF & used [LibrusLib.NET](https://github.com/dejwi/LibrusLib.NET)
 
 ## Settings
