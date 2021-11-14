@@ -40,4 +40,14 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="other\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="other\librusdesktop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
