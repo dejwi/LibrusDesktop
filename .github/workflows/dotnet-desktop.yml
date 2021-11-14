@@ -71,4 +71,4 @@ jobs:
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
             pattern: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/release.zip
-            release-url: steps.create_release.outputs.upload_url }}
+            release-url: ${{ steps.create_release.outputs.upload_url }}
