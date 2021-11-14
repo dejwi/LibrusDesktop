@@ -48,11 +48,11 @@ jobs:
           #  path: LibrusPlan\bin\Debug\net5.0-windows
         
         # Release
-        - name: Upload Release
-          uses: actions/upload-artifact@v2
-          with:
-            name: ${{ steps.date.outputs.date }} Release
-            path: LibrusPlan\bin\Release\net5.0-windows
+        #- name: Upload Release
+        #  uses: actions/upload-artifact@v2
+        #  with:
+        #    name: ${{ steps.date.outputs.date }} Release
+        #    path: LibrusPlan\bin\Release\net5.0-windows
 
         - uses: actions/create-release@v1
           id: create_release
@@ -61,14 +61,17 @@ jobs:
           with:
             tag_name: ${{ github.ref }}
             release_name: ${{ github.ref }}
-        - uses: papeloto/action-zip@v1
+
+        - uses: thedoctor0/zip-release@master
           with:
-            files: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/ manifest.json
-            recursive: false
-            dest: release.zip
+            type: 'zip'
+            path: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
+            filename: 'release.zip'
+            
 
         - uses: csexton/release-asset-action@v2
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
-            pattern: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/release.zip
+            file: 'release.zip'
+            #pattern: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/release.zip
             release-url: ${{ steps.create_release.outputs.upload_url }}
