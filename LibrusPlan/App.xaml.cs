@@ -45,8 +45,6 @@ namespace LibrusPlan
             }
 
             //Inform the threads of the new culture.     
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
 
         }
     }

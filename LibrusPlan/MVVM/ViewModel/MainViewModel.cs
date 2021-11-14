@@ -6,6 +6,7 @@ using LibrusPlan.MVVM.View;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,10 @@ namespace LibrusPlan.MVVM.ViewModel
 {
     public class MainViewModel : ObservableObject
     {
-        public static string configPath = "LB/config.json";
-        public static string userDataPath = "LB/UserData.json";
-        public static string dataPath = "LB/data.json";
-        public static string timePeriodPath = "LB/dataPeriod.json";
+        public static string configPath =  @"LB\config.json";
+        public static string userDataPath =  @"LB\UserData.json";
+        public static string dataPath =  @"LB\data.json";
+        public static string timePeriodPath = @"LB\dataPeriod.json";
 
         private AccountModel _acc;
         public AccountModel acc
@@ -179,14 +180,13 @@ namespace LibrusPlan.MVVM.ViewModel
         //TODO: EnglishOrPolish
         async Task LoadData()
         {
-            
             if (Directory.Exists("LB"))
             {
                 if (File.Exists(configPath))
                 {
                     try
                     {
-                        var json = File.ReadAllText(configPath);
+                    var json = File.ReadAllText(configPath);
                         config = JsonConvert.DeserializeObject<ConfigModel>(json);
                         App.SelectCulture(config.EnglishOrPolish);
                     }
@@ -232,14 +232,29 @@ namespace LibrusPlan.MVVM.ViewModel
                                 var json = File.ReadAllText(timePeriodPath);
                                 LimitedPeriods = JsonConvert.DeserializeObject<List<TimePeriod>>(json);
                             });
+                            loadlocalIsChecked = true;
                         }
                         catch (Exception) { loadlocalIsChecked = false; }
                     }
                     else 
                         loadlocalIsChecked = false;
                 }
+                if(config.EnglishOrPolish == "Polish")
+                {
+                    config.EnglishOrPolish = "Polish";
+                    App.SelectCulture("Polish");
+                    EnglishPolishIsChecked = true;
+                }
+                else
+                {
+                    config.EnglishOrPolish = "English";
+                    App.SelectCulture("English");
+
+                }
+                
 
                 //TODO: EnglishOrPolish
+                
             }
             else
             {
@@ -323,6 +338,9 @@ namespace LibrusPlan.MVVM.ViewModel
 
         async Task SaveConfig()
         {
+            var x = Directory.Exists("LB");
+            var y = File.Exists(configPath);
+            var xy = File.ReadAllText(configPath);
             if (Directory.Exists("LB"))
                 File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
             else
