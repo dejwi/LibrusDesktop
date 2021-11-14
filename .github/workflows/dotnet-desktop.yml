@@ -65,14 +65,14 @@ jobs:
         - uses: thedoctor0/zip-release@master
           with:
             type: 'zip'
+            #path: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
             directory: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
-            path: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
             filename: 'release.zip'
             
 
         - uses: csexton/release-asset-action@v2
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
-            file: 'release.zip'
-            #pattern: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/release.zip
+            #file: 'release.zip'
+            pattern: LibrusPlan/bin/Release/net5.0-windows/win-x64/publish/release.zip
             release-url: ${{ steps.create_release.outputs.upload_url }}
