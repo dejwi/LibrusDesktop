@@ -37,6 +37,8 @@ jobs:
     # Build Debug
     - name: Build Release
       run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Release
+    - name: Build Publish
+      run: dotnet publish LibrusPlan\LibrusPlan.csproj -c Release --self-conatined -r win-x64 -p:PublishSingleFile=true --no-build
 
     # Debug
     #- name: Upload Debug
@@ -51,3 +53,16 @@ jobs:
       with:
         name: ${{ steps.date.outputs.date }} Release
         path: LibrusPlan\bin\Release\net5.0-windows
+
+    - uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+    - uses: csexton/release-asset-actions@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        pattern: LibrusPLan/bin/Release/netcoreapp3.1/win-x64/publish/*.exe
+        release-url: ${{ steps.create_release.outputs.upload_url }}
