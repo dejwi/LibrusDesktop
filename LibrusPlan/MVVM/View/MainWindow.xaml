@@ -59,7 +59,7 @@
                             <MenuItem.Header>
                                 <ToggleButton Content="load data localy"
                                       Margin="0,0,0,0" BorderThickness="0" BorderBrush="Transparent"
-                                      IsChecked="{Binding loadlocalIsChecked, Mode=TwoWay}"
+                                      IsChecked="{Binding loadlocalIsChecked, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                               x:Name="loaddatalocalBtn">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
@@ -119,7 +119,7 @@
                             <MenuItem.Header>
                                 <ToggleButton Content="autologin"
                                       Margin="0,0,0,0" BorderThickness="0" BorderBrush="Transparent"
-                                      IsChecked="{Binding autologinIsChecked,Mode=TwoWay}">
+                                      IsChecked="{Binding autologinIsChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Background" Value="#D46A6A"/>
@@ -178,7 +178,7 @@
                             <MenuItem.Header>
                                 <ToggleButton
                                       Margin="0,0,0,0" BorderThickness="0" BorderBrush="Transparent"
-                                      IsChecked="{Binding EnglishPolishIsChecked, Mode=TwoWay}">
+                                      IsChecked="{Binding EnglishPolishIsChecked, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Background" Value="#D46A6A"/>

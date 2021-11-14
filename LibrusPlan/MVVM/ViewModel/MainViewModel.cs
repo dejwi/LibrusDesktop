@@ -74,13 +74,17 @@ namespace LibrusPlan.MVVM.ViewModel
                 _autologinIsChecked = value;
                 config.AutoLogin = value;
                 Task.Run(SaveConfig);
-                if (value) { 
-                    //checked
+                if (value)
+                {    //checked
+
+                    //autologin or local data
+                    loadlocalIsChecked = false;
                 }
                 else
                 {
                     //unchecked
                 }
+                OnPropertyChanged();
             }
         }
 
@@ -93,14 +97,18 @@ namespace LibrusPlan.MVVM.ViewModel
                 _loadlocalIsChecked = value;
                 config.LoadLocalOnStart = value;
                 Task.Run(SaveConfig);
+
                 if (value)
-                {
-                    //checked
+                {    //checked
+
+                    //autologin or local data
+                    autologinIsChecked = false;
                 }
                 else
                 {
                     //unchecked
                 }
+                OnPropertyChanged();
             }
         }
 
@@ -122,6 +130,7 @@ namespace LibrusPlan.MVVM.ViewModel
                     config.EnglishOrPolish = "Polish";
                 }
                 Task.Run(SaveConfig);
+                OnPropertyChanged();
             }
         }
 
