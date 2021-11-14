@@ -59,10 +59,11 @@
                             <MenuItem.Header>
                                 <ToggleButton Content="load data localy"
                                       Margin="0,0,0,0" BorderThickness="0" BorderBrush="Transparent"
-                                      >
+                                      IsChecked="{Binding loadlocalIsChecked, Mode=TwoWay}"
+                                              x:Name="loaddatalocalBtn">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
-                                            <Setter Property="Background" Value="#82CC76"/>
+                                            <Setter Property="Background" Value="#D46A6A"/>
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ToggleButton">
@@ -81,8 +82,8 @@
                                                             <Storyboard>
                                                                 <ColorAnimation 
                                                                       AutoReverse="False" 
-                                                                      Duration="0:0:0.1" 
-                                                                      From="#82CC76" To="#D46A6A"
+                                                                      Duration="0:0:0.1"
+                                                                      From="#D46A6A" To="#82CC76"
                                                                       AccelerationRatio="1" 
                                                                       Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       FillBehavior="HoldEnd">
@@ -96,7 +97,7 @@
                                                                 <ColorAnimation 
                                                                       AutoReverse="False" 
                                                                       Duration="0:0:0.1" 
-                                                                      From="#D46A6A" To="#82CC76"
+                                                                      From="#82CC76" To="#D46A6A"
                                                                       AccelerationRatio="1" 
                                                                       Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       FillBehavior="HoldEnd">
@@ -118,10 +119,10 @@
                             <MenuItem.Header>
                                 <ToggleButton Content="autologin"
                                       Margin="0,0,0,0" BorderThickness="0" BorderBrush="Transparent"
-                                      >
+                                      IsChecked="{Binding autologinIsChecked,Mode=TwoWay}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
-                                            <Setter Property="Background" Value="#82CC76"/>
+                                            <Setter Property="Background" Value="#D46A6A"/>
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ToggleButton">
@@ -141,7 +142,7 @@
                                                                 <ColorAnimation 
                                                                       AutoReverse="False" 
                                                                       Duration="0:0:0.1" 
-                                                                      From="#82CC76" To="#D46A6A"
+                                                                      From="#D46A6A" To="#82CC76"
                                                                       AccelerationRatio="1" 
                                                                       Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       FillBehavior="HoldEnd">
@@ -155,7 +156,7 @@
                                                                 <ColorAnimation 
                                                                       AutoReverse="False" 
                                                                       Duration="0:0:0.1" 
-                                                                      From="#D46A6A" To="#82CC76"
+                                                                      From="#82CC76" To="#D46A6A"
                                                                       AccelerationRatio="1" 
                                                                       Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       FillBehavior="HoldEnd">
@@ -177,10 +178,10 @@
                             <MenuItem.Header>
                                 <ToggleButton
                                       Margin="0,0,0,0" BorderThickness="0" BorderBrush="Transparent"
-                                      >
+                                      IsChecked="{Binding EnglishPolishIsChecked, Mode=TwoWay}">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
-                                            <Setter Property="Background" Value="#82CC76"/>
+                                            <Setter Property="Background" Value="#D46A6A"/>
                                             <Setter Property="Content" Value="Polish"/>
                                             <Setter Property="Template">
                                                 <Setter.Value>
@@ -202,7 +203,7 @@
                                                                 <ColorAnimation 
                                                                       AutoReverse="False" 
                                                                       Duration="0:0:0.1" 
-                                                                      From="#82CC76" To="#D46A6A"
+                                                                      From="#D46A6A" To="#82CC76"
                                                                       AccelerationRatio="1" 
                                                                       Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       FillBehavior="HoldEnd">
@@ -216,7 +217,7 @@
                                                                 <ColorAnimation 
                                                                       AutoReverse="False" 
                                                                       Duration="0:0:0.1" 
-                                                                      From="#D46A6A" To="#82CC76"
+                                                                      From="#82CC76" To="#D46A6A"
                                                                       AccelerationRatio="1" 
                                                                       Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       FillBehavior="HoldEnd">

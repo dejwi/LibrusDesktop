@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HttpClientLibrus.LessonStrucs
+namespace LibrusLib.LessonStrucs
 {
     public struct TimePeriod
     {

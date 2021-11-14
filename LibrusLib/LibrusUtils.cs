@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace HttpClientLibrus
+namespace LibrusLib
 {
     public static class LibrusUtils
     {

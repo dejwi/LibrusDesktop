@@ -1,5 +1,5 @@
-﻿using HttpClientLibrus;
-using HttpClientLibrus.LessonStrucs;
+﻿using LibrusLib;
+using LibrusLib.LessonStrucs;
 using LibrusPlan.Core;
 using LibrusPlan.MVVM.Model;
 using LibrusPlan.MVVM.View;
@@ -16,6 +16,10 @@ namespace LibrusPlan.MVVM.ViewModel
 {
     public class MainViewModel : ObservableObject
     {
+        public static string configPath = "LB/config.json";
+        public static string userDataPath = "LB/UserData.json";
+        public static string dataPath = "LB/data.json";
+
         private AccountModel _acc;
         public AccountModel acc
         {
@@ -36,9 +40,8 @@ namespace LibrusPlan.MVVM.ViewModel
             }
         }
 
-        private HttpClientLibrus.LibrusPlan _data;
-
-        public HttpClientLibrus.LibrusPlan data
+        private LibrusLib.LibrusPlan _data;
+        public LibrusLib.LibrusPlan data
         {
             get { return _data; }
             set { 
@@ -56,24 +59,97 @@ namespace LibrusPlan.MVVM.ViewModel
         public RelayCommand LoginCommand { get; set; }
 
         public int CurrentDay { get; set; }
+
         private static bool DebugMode = false;
 
         public LoginWindow LoginWin { get; set; }
         public Progress<int> progress { get; set; }
+
+        private bool _autologinIsChecked;
+        public bool autologinIsChecked
+        {
+            get { return _autologinIsChecked; }
+            set
+            {
+                _autologinIsChecked = value;
+                config.AutoLogin = value;
+                Task.Run(SaveConfig);
+                if (value) { 
+                    //checked
+                }
+                else
+                {
+                    //unchecked
+                }
+            }
+        }
+
+        private bool _loadlocalIsChecked;
+        public bool loadlocalIsChecked
+        {
+            get { return _loadlocalIsChecked; }
+            set
+            {
+                _loadlocalIsChecked = value;
+                config.LoadLocalOnStart = value;
+                Task.Run(SaveConfig);
+                if (value)
+                {
+                    //checked
+                }
+                else
+                {
+                    //unchecked
+                }
+            }
+        }
+
+        private bool _EnglishPolishIsChecked;
+        public bool EnglishPolishIsChecked
+        {
+            get { return _EnglishPolishIsChecked; }
+            set
+            {
+                _EnglishPolishIsChecked = value;
+                if (value)
+                {
+                    //checked | english
+                    config.EnglishOrPolish = "English";
+                }
+                else
+                {
+                    //unchecked
+                    config.EnglishOrPolish = "Polish";
+                }
+                Task.Run(SaveConfig);
+            }
+        }
+
+        private ConfigModel _config;
+
+        public ConfigModel config
+        {
+            get { return _config; }
+            set { _config = value;}
+        }
+
 
         public MainViewModel()
         {
             LimitedPeriods = new List<TimePeriod>(15);
             CurrentDay = ((int)DateTime.Today.DayOfWeek);
 
+            //for progressbar 
             progress = new Progress<int>();
             progress.ProgressChanged += ReportProgress;
 
             LoginWin = new LoginWindow();
             LoginWin.DataContext = this;
+
             OpenLoginCommand = new RelayCommand(o => LoginWin.Show());
             LoginCommand = new RelayCommand(o => LoginFromView());
-            
+
+            LoadData();
 
             if (DebugMode)
             {
@@ -88,21 +164,91 @@ namespace LibrusPlan.MVVM.ViewModel
             }
         }
 
+        //TODO: EnglishOrPolish
+        async Task LoadData()
+        {
+            
+            if (Directory.Exists("LB"))
+            {
+                if (File.Exists(configPath))
+                {
+                    try
+                    {
+                        var json = File.ReadAllText(configPath);
+                        config = JsonConvert.DeserializeObject<ConfigModel>(json);
+                    }
+                    catch (Exception)
+                    {
+                        config = DefConfig();
+                        File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
+                    }
+                }
+                else
+                {
+                    config = DefConfig();
+                    File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
+                }
+
+                if (config.AutoLogin)
+                {
+                    if (File.Exists(userDataPath))
+                    {
+                        try
+                        {
+                            var json = File.ReadAllText(userDataPath);
+                            var x = JsonConvert.DeserializeObject<SavedUserData> (json);
+                            init(x.locname, x.Class,x.libusername, x.libpassword);
+                            autologinIsChecked = true;
+                        }
+                        catch (Exception)
+                        {
+                            autologinIsChecked = false;
+                        }     
+                    }
+                    else
+                        autologinIsChecked = false;
+                }
+
+                //TODO: EnglishOrPolish
+            }
+            else
+            {
+                Directory.CreateDirectory("LB");
+                config = DefConfig();
+                File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
+            }
+
+            //if(File.Exists())
+        }
+
+        //progressbar 
         private void ReportProgress(object? sender, int e)
         {
             ((MainWindow)Application.Current.MainWindow).LoadProgress.Value = e;
         }
 
+        //from LoginWindow
         async Task LoginFromView()
         {
             try
             {
                 init(LocalName, Id, Login, Password);
+
+                //save data
+                if (Directory.Exists("LB"))
+                {
+                    var json = JsonConvert.SerializeObject(new SavedUserData{ 
+                        locname = LocalName,
+                        Class= Id,
+                        libusername= Login,
+                        libpassword= Password
+                    });
+                    File.WriteAllText(userDataPath, json);
+                }
+                    
             }
             catch (Exception)
             {
-
-                throw;
             }
             
         }
@@ -113,7 +259,7 @@ namespace LibrusPlan.MVVM.ViewModel
             try
             {
                 acc = await Task.Run(async () => new AccountModel(locname, Class, await LibrusConnection.Connect(libruslogin, libruspassword,progress)));
-                data = await Task.Run(() => HttpClientLibrus.LibrusPlan.Retrieve(acc.accountData,progress));
+                data = await Task.Run(() => LibrusLib.LibrusPlan.Retrieve(acc.accountData,progress));
                 var x = new List<TimePeriod>();
                 for (int i = 0; i < LimitedPeriods.Capacity; i++)
                 {
@@ -125,6 +271,22 @@ namespace LibrusPlan.MVVM.ViewModel
             {
             }
             
+        }
+
+        private ConfigModel DefConfig()
+        {
+            return new ConfigModel { AutoLogin = false, EnglishOrPolish = "Polish", LoadLocalOnStart = false };
+        }
+
+        async Task SaveConfig()
+        {
+            if (Directory.Exists("LB"))
+                File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
+            else
+            {
+                Directory.CreateDirectory("LB");
+                File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
+            }
         }
     }
 }
