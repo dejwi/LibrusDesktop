@@ -66,6 +66,7 @@ jobs:
           with:
             type: 'zip'
             directory: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
+            path: 'LibrusPlan/bin/Release/net5.0-windows/win-x64/publish'
             filename: 'release.zip'
             
 
