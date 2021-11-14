@@ -7,62 +7,62 @@ on:
 
 jobs:
 
-  build:
+  deploy:
     runs-on: windows-latest
     steps:
     
-    - name: Get current date
-      id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        - name: Get current date
+          id: date
+          run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
 
-    # Install the .NET Core workload
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
+        # Install the .NET Core workload
+        - name: Install .NET Core
+          uses: actions/setup-dotnet@v1
+          with:
+            dotnet-version: 5.0.x
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: dotnet restore
+        # Restore the application to populate the obj folder with RuntimeIdentifiers
+        - name: Restore the application
+          run: dotnet restore
 
-    # Build Debug
-    #- name: Build Debug
-     # run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Debug
+        # Build Debug
+        #- name: Build Debug
+         # run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Debug
         
-    # Build Debug
-    - name: Build Release
-      run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Release
-    - name: Build Publish
-      run: dotnet publish LibrusPlan\LibrusPlan.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
+        # Build Debug
+        - name: Build Release
+          run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Release
+        - name: Build Publish
+          run: dotnet publish LibrusPlan\LibrusPlan.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
 
-    # Debug
-    #- name: Upload Debug
-    #  uses: actions/upload-artifact@v2
-     # with:
-      #  name: ${{ steps.date.outputs.date }} Debug
-      #  path: LibrusPlan\bin\Debug\net5.0-windows
+        # Debug
+        #- name: Upload Debug
+        #  uses: actions/upload-artifact@v2
+         # with:
+          #  name: ${{ steps.date.outputs.date }} Debug
+          #  path: LibrusPlan\bin\Debug\net5.0-windows
         
-    # Release
-    - name: Upload Release
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ steps.date.outputs.date }} Release
-        path: LibrusPlan\bin\Release\net5.0-windows
+        # Release
+        - name: Upload Release
+          uses: actions/upload-artifact@v2
+          with:
+            name: ${{ steps.date.outputs.date }} Release
+            path: LibrusPlan\bin\Release\net5.0-windows
 
-    - uses: actions/create-release@v1
-      id: create_release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-    - uses: csexton/release-asset-action@v2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        pattern: LibrusPLan/bin/Release/netcoreapp3.1/win-x64/publish/*.exe
-        release-url: ${{ steps.create_release.outputs.upload_url }}
+        - uses: actions/create-release@v1
+          id: create_release
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: ${{ github.ref }}
+        - uses: csexton/release-asset-action@v2
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            pattern: LibrusPlan/bin/Release/netcoreapp3.1/win-x64/publish/*.exe
+            release-url: ${{ steps.create_release.outputs.upload_url }}
