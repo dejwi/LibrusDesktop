@@ -1,15 +1,9 @@
-name: Public GitHub build
+name: "Dotnet build"
 
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-      tags:
-        description: "Description:"
-        default: "Manual build from source"
+    push:
+        tags:
+        - "desktop/v*"
 
 jobs:
 
@@ -37,19 +31,19 @@ jobs:
       run: dotnet restore
 
     # Build Debug
-    - name: Build Debug
-      run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Debug
+    #- name: Build Debug
+     # run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Debug
         
     # Build Debug
     - name: Build Release
       run: dotnet build LibrusPlan\LibrusPlan.csproj --configuration Release
 
     # Debug
-    - name: Upload Debug
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ steps.date.outputs.date }} Debug
-        path: LibrusPlan\bin\Debug\net5.0-windows
+    #- name: Upload Debug
+    #  uses: actions/upload-artifact@v2
+     # with:
+      #  name: ${{ steps.date.outputs.date }} Debug
+      #  path: LibrusPlan\bin\Debug\net5.0-windows
         
     # Release
     - name: Upload Release
