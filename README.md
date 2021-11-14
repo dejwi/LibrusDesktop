@@ -5,6 +5,7 @@
 
 # Functionality
 login&view your school timetable using data from librus
+made with WPF & used [LibrusLib.NET](https://github.com/dejwi/LibrusLib.NET)
 
 ## Settings
 <img src="/other/librussettings.png">
